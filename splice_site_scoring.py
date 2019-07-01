@@ -167,7 +167,8 @@ if __name__ == '__main__':
 	parser_a.add_argument('--downstream-nt', type=int, default=3, help="Number of nucleotides to read into the downstream (3'SS) exon.")
 
 	# Create PWM based on fasta file
-	parser_b = subparsers.add_parser('make-PWM', help="Create a PWM based on an input fasta file.")
+	parser_b = subparsers.add_parser('make-PWM', help="Create a PWM from an input fasta file (in the format from the get-fasta command).")
+
 
 	# Score splice sites
 	parser_c = subparsers.add_parser('score-sites', help="Score splice sites based on supplied PWMs.")
@@ -175,7 +176,7 @@ if __name__ == '__main__':
 	parser_c.add_argument('-t', '--test', required=True, help="Fasta sequences to score (from get-fasta).")
 	parser_c.add_argument('--PWM5', required=True, help="5' splice site PWM file.")
 	parser_c.add_argument('--PWM3', required=True, help="3' splice site PWM file.")
-	parser_c.add_argument('-o', '--output-file', required=True, help="Output file.")	
+	parser_c.add_argument('-o', '--output-file', required=True, help="Output file.")
 	parser_c.add_argument('--five-prime-region', default='-3,+10', help="Specify the number of exonic bases (-x) and intronic bases (+y) for the 5' splice site.")
 	parser_c.add_argument('--three-prime-region', default='-14,+3', help="Specify the number of intronic base (-x) and exonic bases (+y) for the 3' splice site.")
 	group = parser_c.add_mutually_exclusive_group()

@@ -11,6 +11,7 @@ def bloat(file1, file2, s1="\t", s2="\t", X=0, Y=0, bloats='*'):
 
 	# Get the bloating content from file2
 	bloating = {}
+	longest_bloat = 0
 	for line in open(file2):
 		if not line.startswith('#'):
 			cols = line.rstrip().split(s2)
@@ -24,6 +25,7 @@ def bloat(file1, file2, s1="\t", s2="\t", X=0, Y=0, bloats='*'):
 				if bloats == '*':
 					del cols[Y]
 					bloating[colY] = s2.join(cols)
+					if len(cols) > longest_bloat: longest_bloat = len(cols)
 
 				# Add specific columns only
 				else:
@@ -36,9 +38,9 @@ def bloat(file1, file2, s1="\t", s2="\t", X=0, Y=0, bloats='*'):
 			cols = line.rstrip().split(s1)
 			colX = cols[X]
 			if cols[X] in bloating:
-				print "{}{}{}".format(line.rstrip(), s1, bloating[colX])
+				print("{}{}{}".format(line.rstrip('\n'), s1, bloating[colX]))
 			else: 
-				print line.rstrip()
+				print(line.rstrip('\n')+s1*longest_bloat)
 
 if __name__ == '__main__':
 
